@@ -1,0 +1,56 @@
+---
+import smalltownheroesLogoDark from "../../assets/company-logos/smalltownheroes-dark.png";
+// import smalltownheroesLogoLight from "../../assets/company-logos/smalltownheroes-light.png";
+import waylayLogoDark from "../../assets/company-logos/waylay-dark.png";
+// import waylayLogoLight from "../../assets/company-logos/waylay-light.png";
+import cheqroomLogoDark from "../../assets/company-logos/cheqroom-dark.png";
+// import cheqroomLogoLight from "../../assets/company-logos/cheqroom-light.png";
+import whaleLogoDark from "../../assets/company-logos/whale-dark.png";
+// import whaleLogoLight from "../../assets/company-logos/whale-light.png";
+import Stack from "../common/Stack.astro";
+
+const COMPANIES = [
+  {
+    name: "Smalltown Heroes",
+    logoDark: smalltownheroesLogoDark,
+  },
+  { name: "Waylay", logoDark: waylayLogoDark },
+  {
+    name: "Cheqroom",
+    logoDark: cheqroomLogoDark,
+  },
+  { name: "Whale", logoDark: whaleLogoDark },
+];
+---
+
+<Stack direction="column" alignItems="center" spacing={2}>
+  <h2>Made friends at</h2>
+
+  <Stack direction="row" spacing={5} wrap={true} justifyContent="center">
+    {
+      COMPANIES.map((company) => (
+        <article class="logo-container">
+          <img src={company.logoDark.src} alt={company.name} />
+        </article>
+      ))
+    }
+  </Stack>
+</Stack>
+
+<style>
+  .logo-container {
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+  }
+
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

@@ -1,0 +1,138 @@
+---
+import Stack from "../common/Stack.astro";
+
+const WORDS = ["product builder", "runner", "photographer", "problem solver"];
+const ENABLE_ANIMATION = true; // Set to false to disable typing animation (words appear instantly)
+---
+
+<Stack direction="column" className="iam-container">
+  <h2 class="role-title">I'M A</h2>
+  <Stack direction="row" alignItems="center">
+    <h2 class="role-word" id="role-word">{ENABLE_ANIMATION ? "" : WORDS[0]}</h2>
+    <span class="cursor" id="cursor">|</span>
+  </Stack>
+</Stack>
+
+<style>
+  .iam-container {
+    flex-grow: 1;
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+  }
+
+  .role-word {
+    user-select: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.9;
+  }
+
+  .cursor {
+    font-weight: 500;
+    font-size: 2.2em;
+    animation: none;
+    opacity: 1;
+    margin-left: 0.1em;
+    padding-bottom: 0.1em;
+  }
+
+  .cursor.blink {
+    animation: blink 1s infinite;
+  }
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script define:vars={{ words: WORDS, enableAnimation: ENABLE_ANIMATION }}>
+  const roleWord = document.getElementById("role-word");
+  const cursor = document.getElementById("cursor");
+  let currentIndex = 0;
+  let typingTimeout = null;
+  let deletingTimeout = null;
+  let waitTimeout = null;
+  let rotationInterval = null;
+  let isTyping = false;
+  let isDeleting = false;
+
+  function clearAllTimeouts() {
+    if (typingTimeout) clearTimeout(typingTimeout);
+    if (deletingTimeout) clearTimeout(deletingTimeout);
+    if (waitTimeout) clearTimeout(waitTimeout);
+    if (rotationInterval) clearInterval(rotationInterval);
+    typingTimeout = null;
+    deletingTimeout = null;
+    waitTimeout = null;
+    rotationInterval = null;
+  }
+
+  function typeWord(word, index = 0) {
+    if (!roleWord) return;
+
+    isTyping = true;
+    isDeleting = false;
+    if (cursor) cursor.classList.remove("blink");
+
+    if (index < word.length) {
+      roleWord.textContent = word.substring(0, index + 1);
+      typingTimeout = setTimeout(() => typeWord(word, index + 1), 75);
+    } else {
+      // Typing complete, wait 3 seconds - cursor should blink during this wait
+      isTyping = false;
+      if (cursor) cursor.classList.add("blink");
+      waitTimeout = setTimeout(() => {
+        if (enableAnimation) {
+          deleteWord(word);
+        } else {
+          // Skip deletion, move directly to next word
+          currentIndex = (currentIndex + 1) % words.length;
+          roleWord.textContent = "";
+          typeWord(words[currentIndex]);
+        }
+      }, 3000);
+    }
+  }
+
+  function deleteWord(word, index = word.length) {
+    if (!roleWord) return;
+
+    isDeleting = true;
+    isTyping = false;
+    if (cursor) cursor.classList.remove("blink");
+
+    if (index > 0) {
+      roleWord.textContent = word.substring(0, index - 1);
+      deletingTimeout = setTimeout(() => deleteWord(word, index - 1), 60);
+    } else {
+      // Deletion complete, move to next word
+      isDeleting = false;
+      currentIndex = (currentIndex + 1) % words.length;
+      typeWord(words[currentIndex]);
+    }
+  }
+
+  function startTyping() {
+    clearAllTimeouts();
+    currentIndex = 0;
+    typeWord(words[currentIndex]);
+  }
+
+  if (roleWord) {
+    if (enableAnimation) {
+      // Start typing animation
+      startTyping();
+    }
+    // When animation is disabled, just show the first word (no rotation)
+  }
+</script>
