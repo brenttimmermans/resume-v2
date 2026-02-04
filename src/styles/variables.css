@@ -1,7 +1,18 @@
 :root {
-	/* Colors */
+	/* Light Mode Colors */
 	--color-background-light: hsl(17, 41%, 97%);
 	--color-text-primary-light: hsl(215, 10%, 20%);
+	--color-avatar-border-light: white;
+
+	/* Dark Mode Colors */
+	--color-background-dark: hsl(215, 10%, 10%);
+	--color-text-primary-dark: hsl(0, 0%, 90%);
+	--color-avatar-border-dark: hsl(215, 10%, 20%);
+
+	/* Semantic Colors (default to light mode) */
+	--color-background: var(--color-background-light);
+	--color-text-primary: var(--color-text-primary-light);
+	--color-avatar-border: var(--color-avatar-border-light);
 
 	/* Font Sizes */
 	--font-size-sm: 0.75rem; /* 12px */
@@ -10,4 +21,14 @@
 	--font-size-xl: 3rem; /* 48px */
 
 	--spacing: 8px;
+
+	/* Transitions */
+	--transition-duration: 0.3s;
+}
+
+[data-theme="dark"] {
+	/* Override semantic colors for dark mode */
+	--color-background: var(--color-background-dark);
+	--color-text-primary: var(--color-text-primary-dark);
+	--color-avatar-border: var(--color-avatar-border-dark);
 }

@@ -1,0 +1,115 @@
+---
+import MoonIcon from "../../assets/icons/moon.svg";
+import SunIcon from "../../assets/icons/sun.svg";
+---
+
+<button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+  <span class="theme-icon" id="theme-icon">
+    <MoonIcon id="moon-icon" class="icon-svg" />
+    <SunIcon id="sun-icon" class="icon-svg hidden" />
+  </span>
+</button>
+
+<style>
+  .theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+
+    position: absolute;
+    top: 20px;
+    right: 0;
+
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s ease;
+  }
+
+  .theme-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+
+  .theme-icon {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-duration) ease;
+  }
+
+  .icon-svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+    color: var(--color-text-primary);
+    transition: color var(--transition-duration) ease;
+  }
+
+  .icon-svg.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  type Theme = "dark" | "light";
+
+  const THEME_LOCAL_STORAGE_KEY = "theme";
+
+  const initialTheme = getInitialTheme();
+  setTheme(initialTheme);
+
+  function getInitialTheme(): Theme {
+    const storedTheme = localStorage.getItem(THEME_LOCAL_STORAGE_KEY);
+    if (storedTheme) return storedTheme as Theme;
+
+    const isDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return isDarkMode ? "dark" : "light";
+  }
+
+  function setTheme(theme: Theme): void {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem(THEME_LOCAL_STORAGE_KEY, theme);
+
+    const sunIcon = document.getElementById("sun-icon");
+    const moonIcon = document.getElementById("moon-icon");
+
+    if (theme === "dark") {
+      sunIcon?.classList.remove("hidden");
+      moonIcon?.classList.add("hidden");
+    } else {
+      sunIcon?.classList.add("hidden");
+      moonIcon?.classList.remove("hidden");
+    }
+  }
+
+  function toggleTheme(): void {
+    const currentTheme =
+      document.documentElement.getAttribute("data-theme") || "light";
+    const newTheme = currentTheme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+  }
+
+  // Event handlers
+  const themeToggle = document.getElementById("theme-toggle");
+  themeToggle?.addEventListener("click", toggleTheme);
+
+  window
+    .matchMedia?.("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      // Only update if user hasn't set a preference
+      if (!localStorage.getItem(THEME_LOCAL_STORAGE_KEY)) {
+        setTheme(e.matches ? "dark" : "light");
+      }
+    });
+</script>

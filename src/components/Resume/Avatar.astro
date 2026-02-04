@@ -24,8 +24,10 @@ import avatar from "../../assets/avatar.png";
     background: linear-gradient(315deg, #166383 0%, #64c98e 50%, #c8ded6 100%);
 
     border-radius: 0 50% 0 50%;
-    border: 5px solid white;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    border: 5px solid var(--color-avatar-border);
+    transition: border-color var(--transition-duration) ease;
   }
 
   .profile-image {

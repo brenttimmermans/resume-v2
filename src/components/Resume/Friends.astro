@@ -1,25 +1,35 @@
 ---
 import smalltownheroesLogoDark from "../../assets/company-logos/smalltownheroes-dark.png";
-// import smalltownheroesLogoLight from "../../assets/company-logos/smalltownheroes-light.png";
+import smalltownheroesLogoLight from "../../assets/company-logos/smalltownheroes-light.png";
 import waylayLogoDark from "../../assets/company-logos/waylay-dark.png";
-// import waylayLogoLight from "../../assets/company-logos/waylay-light.png";
+import waylayLogoLight from "../../assets/company-logos/waylay-light.png";
 import cheqroomLogoDark from "../../assets/company-logos/cheqroom-dark.png";
-// import cheqroomLogoLight from "../../assets/company-logos/cheqroom-light.png";
+import cheqroomLogoLight from "../../assets/company-logos/cheqroom-light.png";
 import whaleLogoDark from "../../assets/company-logos/whale-dark.png";
-// import whaleLogoLight from "../../assets/company-logos/whale-light.png";
+import whaleLogoLight from "../../assets/company-logos/whale-light.png";
 import Stack from "../common/Stack.astro";
 
 const COMPANIES = [
   {
     name: "Smalltown Heroes",
     logoDark: smalltownheroesLogoDark,
+    logoLight: smalltownheroesLogoLight,
   },
-  { name: "Waylay", logoDark: waylayLogoDark },
+  {
+    name: "Waylay",
+    logoDark: waylayLogoDark,
+    logoLight: waylayLogoLight,
+  },
   {
     name: "Cheqroom",
     logoDark: cheqroomLogoDark,
+    logoLight: cheqroomLogoLight,
   },
-  { name: "Whale", logoDark: whaleLogoDark },
+  {
+    name: "Whale",
+    logoDark: whaleLogoDark,
+    logoLight: whaleLogoLight,
+  },
 ];
 ---
 
@@ -30,7 +40,13 @@ const COMPANIES = [
     {
       COMPANIES.map((company) => (
         <article class="logo-container">
-          <img src={company.logoDark.src} alt={company.name} />
+          <img
+            src={company.logoDark.src}
+            alt={company.name}
+            class="logo-dark"
+            data-light-src={company.logoLight.src}
+            data-dark-src={company.logoDark.src}
+          />
         </article>
       ))
     }
@@ -44,8 +60,6 @@ const COMPANIES = [
     display: flex;
     align-items: center;
     justify-content: center;
-
-    border-radius: 8px;
   }
 
   .logo-container img {
@@ -54,3 +68,28 @@ const COMPANIES = [
     object-fit: contain;
   }
 </style>
+
+<script>
+  function updateLogos() {
+    const theme =
+      document.documentElement.getAttribute("data-theme") || "light";
+    const logos = document.querySelectorAll(
+      ".logo-container img",
+    ) as NodeListOf<HTMLImageElement>;
+
+    logos.forEach((logo) => {
+      logo.src =
+        (theme === "dark"
+          ? logo.getAttribute("data-light-src")
+          : logo.getAttribute("data-dark-src")) || "";
+    });
+  }
+
+  updateLogos();
+
+  const observer = new MutationObserver(() => updateLogos());
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["data-theme"],
+  });
+</script>
