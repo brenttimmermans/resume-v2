@@ -1,0 +1,51 @@
+---
+import Stack from "../common/Stack.astro";
+
+const SOCIAL_LINKS = [
+  {
+    name: "GitHub",
+    url: "https://github.com/brenttimmermans",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/brenttimmermans",
+  },
+];
+---
+
+<nav>
+  <Stack direction="row" spacing={2} wrap={true} justifyContent="center">
+    {
+      SOCIAL_LINKS.map(({ name, url }) => (
+        <a
+          href={url}
+          class="social-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          title={name}
+        >
+          {name.toUpperCase()}
+        </a>
+      ))
+    }
+  </Stack>
+</nav>
+
+<style>
+  .social-link {
+    color: inherit;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: var(--font-size-sm);
+  }
+
+  .social-link:hover {
+    transform: translateY(-2px);
+  }
+</style>

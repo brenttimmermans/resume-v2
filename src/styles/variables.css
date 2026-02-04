@@ -1,0 +1,13 @@
+:root {
+	/* Colors */
+	--color-background-light: hsl(17, 41%, 97%);
+	--color-text-primary-light: hsl(215, 10%, 20%);
+
+	/* Font Sizes */
+	--font-size-sm: 0.75rem; /* 12px */
+	--font-size-base: 1rem; /* 16px */
+	--font-size-lg: 2rem; /* 32px */
+	--font-size-xl: 3rem; /* 48px */
+
+	--spacing: 8px;
+}

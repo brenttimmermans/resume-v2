@@ -1,0 +1,50 @@
+---
+export interface Props {
+  direction?: "row" | "column";
+  spacing?: number;
+  alignItems?: "flex-start" | "center" | "flex-end" | "stretch";
+  justifyContent?:
+    | "flex-start"
+    | "center"
+    | "flex-end"
+    | "space-between"
+    | "space-around"
+    | "space-evenly";
+  wrap?: boolean;
+  className?: string;
+}
+
+const {
+  direction = "column",
+  spacing = 0,
+  alignItems = "stretch",
+  justifyContent = "flex-start",
+  className = "",
+} = Astro.props;
+
+const wrap = Astro.props.wrap ? "wrap" : "nowrap";
+---
+
+<section class={`stack ${className}`}>
+  <slot />
+</section>
+
+<style
+  define:vars={{
+    direction,
+    spacingValue: spacing,
+    alignItems,
+    justifyContent,
+    wrap,
+  }}
+>
+  .stack {
+    display: flex;
+    flex-direction: var(--direction);
+    gap: calc(var(--spacing) * var(--spacingValue));
+    align-items: var(--alignItems);
+    justify-content: var(--justifyContent);
+    flex-wrap: var(--wrap);
+    width: 100%;
+  }
+</style>

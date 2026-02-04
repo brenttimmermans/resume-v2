@@ -1,0 +1,57 @@
+---
+import Stack from "../common/Stack.astro";
+import Avatar from "./Avatar.astro";
+import CoffeeText from "./CoffeeText.astro";
+import CurrentRole from "./CurrentRole.astro";
+import Friends from "./Friends.astro";
+import HiText from "./HiText.astro";
+import IAm from "./IAm.astro";
+import Socials from "./Socials.astro";
+---
+
+<section id="container">
+  <main>
+    <Stack direction="column" alignItems="center" spacing={10}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        spacing={4}
+      >
+        <Stack
+          direction="column"
+          alignItems="flex-start"
+          spacing={1}
+          className="text-container"
+        >
+          <HiText />
+          <IAm />
+          <CurrentRole />
+        </Stack>
+        <Avatar />
+      </Stack>
+
+      <Friends />
+
+      <Stack direction="column" alignItems="center" spacing={2}>
+        <CoffeeText />
+        <Socials />
+      </Stack>
+    </Stack>
+  </main>
+</section>
+
+<style>
+  #container {
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  main {
+    max-width: 700px;
+    width: 100%;
+  }
+</style>
