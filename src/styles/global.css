@@ -6,8 +6,11 @@ body {
 	font-family:
 		"Montserrat", BlinkMacSystemFont, "Helvetica Neue", Helvetica, sans-serif;
 	line-height: 1.2;
-	color: var(--color-text-primary-light);
-	background-color: var(--color-background-light);
+	color: var(--color-text-primary);
+	background-color: var(--color-background);
+	transition:
+		background-color var(--transition-duration) ease,
+		color var(--transition-duration) ease;
 }
 
 h1,

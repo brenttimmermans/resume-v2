@@ -9,47 +9,37 @@ import IAm from "./IAm.astro";
 import Socials from "./Socials.astro";
 ---
 
-<section id="container">
-  <main>
-    <Stack direction="column" alignItems="center" spacing={10}>
+<main>
+  <Stack direction="column" alignItems="center" spacing={10}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent="center"
+      spacing={4}
+    >
       <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        spacing={4}
+        direction="column"
+        alignItems="flex-start"
+        spacing={1}
+        className="text-container"
       >
-        <Stack
-          direction="column"
-          alignItems="flex-start"
-          spacing={1}
-          className="text-container"
-        >
-          <HiText />
-          <IAm />
-          <CurrentRole />
-        </Stack>
-        <Avatar />
+        <HiText />
+        <IAm />
+        <CurrentRole />
       </Stack>
-
-      <Friends />
-
-      <Stack direction="column" alignItems="center" spacing={2}>
-        <CoffeeText />
-        <Socials />
-      </Stack>
+      <Avatar />
     </Stack>
-  </main>
-</section>
+
+    <Friends />
+
+    <Stack direction="column" alignItems="center" spacing={2}>
+      <CoffeeText />
+      <Socials />
+    </Stack>
+  </Stack>
+</main>
 
 <style>
-  #container {
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
   main {
     max-width: 700px;
     width: 100%;
