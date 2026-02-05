@@ -10,7 +10,7 @@ import Socials from "./Socials.astro";
 ---
 
 <article>
-  <Stack direction="column" alignItems="center" spacing={10}>
+  <Stack direction="column" alignItems="center" spacing={10} class="main-stack">
     <Stack
       direction="row"
       alignItems="center"
@@ -47,9 +47,16 @@ import Socials from "./Socials.astro";
     width: 100%;
   }
 
+  @media (max-width: 500px) {
+    .main-stack {
+      gap: calc(var(--spacing) * 6);
+    }
+  }
+
   @media (max-width: 760px) {
     .header {
       flex-direction: column;
+      gap: calc(var(--spacing) * 4);
     }
 
     .header .text-container {
