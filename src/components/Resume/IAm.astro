@@ -2,7 +2,7 @@
 import Stack from "../common/Stack.astro";
 
 const WORDS = ["product builder", "runner", "photographer", "problem solver"];
-const ENABLE_ANIMATION = false; // Set to false to disable typing animation (words appear instantly)
+const ENABLE_ANIMATION = true; // Set to false to disable typing animation (words appear instantly)
 ---
 
 <Stack direction="column" class="iam-container">
@@ -29,7 +29,6 @@ const ENABLE_ANIMATION = false; // Set to false to disable typing animation (wor
   }
 
   .role-word {
-    user-select: none;
     font-weight: 900;
     text-transform: uppercase;
     line-height: 0.9;
@@ -63,68 +62,20 @@ const ENABLE_ANIMATION = false; // Set to false to disable typing animation (wor
 <script define:vars={{ words: WORDS, enableAnimation: ENABLE_ANIMATION }}>
   const roleWord = document.getElementById("role-word");
   const cursor = document.getElementById("cursor");
+
   let currentIndex = 0;
+
   let typingTimeout = null;
   let deletingTimeout = null;
   let waitTimeout = null;
+
   let rotationInterval = null;
+
   let isTyping = false;
   let isDeleting = false;
 
-  function clearAllTimeouts() {
-    if (typingTimeout) clearTimeout(typingTimeout);
-    if (deletingTimeout) clearTimeout(deletingTimeout);
-    if (waitTimeout) clearTimeout(waitTimeout);
-    if (rotationInterval) clearInterval(rotationInterval);
-    typingTimeout = null;
-    deletingTimeout = null;
-    waitTimeout = null;
-    rotationInterval = null;
-  }
-
-  function typeWord(word, index = 0) {
-    if (!roleWord) return;
-
-    isTyping = true;
-    isDeleting = false;
-    if (cursor) cursor.classList.remove("blink");
-
-    if (index < word.length) {
-      roleWord.textContent = word.substring(0, index + 1);
-      typingTimeout = setTimeout(() => typeWord(word, index + 1), 75);
-    } else {
-      // Typing complete, wait 3 seconds - cursor should blink during this wait
-      isTyping = false;
-      if (cursor) cursor.classList.add("blink");
-      waitTimeout = setTimeout(() => {
-        if (enableAnimation) {
-          deleteWord(word);
-        } else {
-          // Skip deletion, move directly to next word
-          currentIndex = (currentIndex + 1) % words.length;
-          roleWord.textContent = "";
-          typeWord(words[currentIndex]);
-        }
-      }, 3000);
-    }
-  }
-
-  function deleteWord(word, index = word.length) {
-    if (!roleWord) return;
-
-    isDeleting = true;
-    isTyping = false;
-    if (cursor) cursor.classList.remove("blink");
-
-    if (index > 0) {
-      roleWord.textContent = word.substring(0, index - 1);
-      deletingTimeout = setTimeout(() => deleteWord(word, index - 1), 60);
-    } else {
-      // Deletion complete, move to next word
-      isDeleting = false;
-      currentIndex = (currentIndex + 1) % words.length;
-      typeWord(words[currentIndex]);
-    }
+  if (roleWord && enableAnimation) {
+    startTyping();
   }
 
   function startTyping() {
@@ -133,11 +84,64 @@ const ENABLE_ANIMATION = false; // Set to false to disable typing animation (wor
     typeWord(words[currentIndex]);
   }
 
-  if (roleWord) {
-    if (enableAnimation) {
-      // Start typing animation
-      startTyping();
+  function clearAllTimeouts() {
+    clearTimeout(typingTimeout);
+    typingTimeout = null;
+
+    clearTimeout(deletingTimeout);
+    deletingTimeout = null;
+
+    clearTimeout(waitTimeout);
+    waitTimeout = null;
+
+    clearInterval(rotationInterval);
+    rotationInterval = null;
+  }
+
+  function typeWord(word, index = 0) {
+    if (!roleWord) return;
+
+    isTyping = true;
+    isDeleting = false;
+
+    if (cursor) cursor.classList.remove("blink");
+
+    const wordIsNotComplete = index < word.length;
+    if (wordIsNotComplete) {
+      roleWord.textContent = word.substring(0, index + 1);
+      typingTimeout = setTimeout(() => typeWord(word, index + 1), 75);
+      return;
     }
-    // When animation is disabled, just show the first word (no rotation)
+
+    isTyping = false;
+
+    if (cursor) cursor.classList.add("blink");
+
+    waitTimeout = setTimeout(() => {
+      deleteWord(word);
+    }, 3000);
+  }
+
+  function deleteWord(word, index = word.length) {
+    if (!roleWord) return;
+
+    isDeleting = true;
+    isTyping = false;
+
+    if (cursor) cursor.classList.remove("blink");
+
+    const wordIsNotDeleted = index > 0;
+    if (wordIsNotDeleted) {
+      roleWord.textContent = word.substring(0, index - 1);
+      deletingTimeout = setTimeout(() => deleteWord(word, index - 1), 60);
+      return;
+    }
+
+    // Deletion complete, move to next word
+    isDeleting = false;
+
+    currentIndex = (currentIndex + 1) % words.length;
+
+    typeWord(words[currentIndex]);
   }
 </script>
