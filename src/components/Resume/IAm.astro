@@ -16,7 +16,11 @@ const ENABLE_ANIMATION = false; // Set to false to disable typing animation (wor
 <style>
   .iam-container {
     flex-grow: 1;
-    font-size: var(--font-size-xl);
+    font-size: clamp(
+      var(--font-size-md),
+      calc(var(--font-size-md) + 0.1 * (100vw - var(--iam-min-viewport-width))),
+      var(--font-size-xl)
+    );
   }
 
   h2 {
