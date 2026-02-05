@@ -16,6 +16,7 @@ import Socials from "./Socials.astro";
       alignItems="center"
       justifyContent="center"
       spacing={2}
+      className="header"
     >
       <Stack
         direction="column"
@@ -27,7 +28,9 @@ import Socials from "./Socials.astro";
         <IAm />
         <CurrentRole />
       </Stack>
-      <Avatar />
+      <div class="avatar-container">
+        <Avatar />
+      </div>
     </Stack>
 
     <Friends />
@@ -42,5 +45,19 @@ import Socials from "./Socials.astro";
 <style>
   article {
     width: 100%;
+  }
+
+  @media (max-width: 760px) {
+    :global(.header.stack) {
+      flex-direction: column;
+    }
+
+    :global(.header.stack) :global(.text-container.stack) {
+      order: 2;
+    }
+
+    :global(.header.stack) .avatar-container {
+      order: 1;
+    }
   }
 </style>

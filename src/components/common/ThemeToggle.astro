@@ -18,7 +18,7 @@ import SunIcon from "../../assets/icons/sun.svg";
 
     position: absolute;
     top: 0;
-    right: 0;
+    right: calc(var(--spacing) * 5);
 
     width: 42px;
     height: 42px;
@@ -29,6 +29,18 @@ import SunIcon from "../../assets/icons/sun.svg";
     justify-content: center;
 
     transition: transform 0.2s ease;
+  }
+
+  @media (max-width: 760px) {
+    .theme-toggle {
+      top: 30px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .theme-toggle {
+      right: calc(var(--spacing) * 3);
+    }
   }
 
   .theme-toggle:hover {

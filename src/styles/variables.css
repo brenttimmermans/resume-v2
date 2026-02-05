@@ -24,6 +24,11 @@
 
 	/* Transitions */
 	--transition-duration: 0.3s;
+
+	/* Breakpoints */
+	--breakpoint-large: 760px;
+	--breakpoint-medium: 500px;
+	--breakpoint-small: 450px;
 }
 
 [data-theme="dark"] {

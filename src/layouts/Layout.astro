@@ -25,8 +25,20 @@ import ThemeToggle from "../components/common/ThemeToggle.astro";
 
 <style>
   main {
-    width: 100%;
     position: relative;
+    box-sizing: content-box;
+
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+
     padding-block: calc(var(--spacing) * 10);
+    padding-inline: calc(var(--spacing) * 5);
+  }
+
+  @media (max-width: 500px) {
+    main {
+      padding-inline: calc(var(--spacing) * 3);
+    }
   }
 </style>

@@ -14,7 +14,13 @@ const SOCIAL_LINKS = [
 ---
 
 <nav>
-  <Stack direction="row" spacing={2} wrap={true} justifyContent="center">
+  <Stack
+    direction="row"
+    spacing={2}
+    wrap={true}
+    justifyContent="center"
+    className="socials-container"
+  >
     {
       SOCIAL_LINKS.map(({ name, url }) => (
         <a
@@ -44,5 +50,11 @@ const SOCIAL_LINKS = [
 
   .social-link:hover {
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 450px) {
+    :global(.socials-container.stack) {
+      flex-direction: column;
+    }
   }
 </style>
