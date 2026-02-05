@@ -11,7 +11,7 @@ export interface Props {
     | "space-around"
     | "space-evenly";
   wrap?: boolean;
-  className?: string;
+  class?: string;
 }
 
 const {
@@ -19,13 +19,14 @@ const {
   spacing = 0,
   alignItems = "stretch",
   justifyContent = "flex-start",
-  className = "",
+  class: className = "",
+  ...rest
 } = Astro.props;
 
 const wrap = Astro.props.wrap ? "wrap" : "nowrap";
 ---
 
-<section class={`stack ${className}`}>
+<section class:list={["stack", className]} {...rest}>
   <slot />
 </section>
 
