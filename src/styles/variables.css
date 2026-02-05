@@ -1,13 +1,13 @@
 :root {
 	/* Light Mode Colors */
-	--color-background-light: hsl(17, 41%, 97%);
-	--color-text-primary-light: hsl(215, 10%, 20%);
-	--color-avatar-border-light: white;
+	--color-background-light: hsl(17, 40%, 97%);
+	--color-text-primary-light: hsl(215, 7%, 20%);
+	--color-avatar-border-light: hsl(17, 20%, 100%);
 
 	/* Dark Mode Colors */
-	--color-background-dark: hsl(215, 10%, 10%);
-	--color-text-primary-dark: hsl(0, 0%, 90%);
-	--color-avatar-border-dark: hsl(215, 10%, 20%);
+	--color-background-dark: hsl(215, 7%, 10%);
+	--color-text-primary-dark: hsl(17, 0%, 93%);
+	--color-avatar-border-dark: hsl(215, 7%, 20%);
 
 	/* Semantic Colors (default to light mode) */
 	--color-background: var(--color-background-light);
