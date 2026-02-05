@@ -36,7 +36,13 @@ const COMPANIES = [
 <Stack direction="column" alignItems="center" spacing={2}>
   <h2>Made friends at</h2>
 
-  <Stack direction="row" spacing={5} wrap={true} justifyContent="center">
+  <Stack
+    direction="row"
+    spacing={5}
+    wrap={true}
+    justifyContent="center"
+    className="logos-container"
+  >
     {
       COMPANIES.map((company) => (
         <article class="logo-container">
@@ -66,6 +72,12 @@ const COMPANIES = [
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  @media (max-width: 500px) {
+    :global(.logos-container.stack) {
+      flex-direction: column;
+    }
   }
 </style>
 
