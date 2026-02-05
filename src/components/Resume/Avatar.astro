@@ -3,23 +3,26 @@ import avatar from "../../assets/avatar.png";
 ---
 
 <figure class="profile-picture">
-  <div class="profile-circle">
-    <img src={avatar.src} alt="Profile picture" class="profile-image" />
-  </div>
+  <div class="profile-circle"></div>
+  <img src={avatar.src} alt="Profile picture" class="profile-image" />
 </figure>
 
 <style>
   .profile-picture {
     flex-shrink: 0;
+    position: relative;
+    width: 170px;
+    aspect-ratio: 17/20;
   }
 
   .profile-circle {
     width: 150px;
     height: 150px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
     background: linear-gradient(315deg, #166383 0%, #64c98e 50%, #c8ded6 100%);
 
@@ -31,8 +34,14 @@ import avatar from "../../assets/avatar.png";
   }
 
   .profile-image {
-    max-width: 250px;
-    max-height: 250px;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    z-index: 1;
   }
 </style>
