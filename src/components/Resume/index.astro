@@ -16,13 +16,13 @@ import Socials from "./Socials.astro";
       alignItems="center"
       justifyContent="center"
       spacing={2}
-      className="header"
+      class="header"
     >
       <Stack
         direction="column"
         alignItems="flex-start"
         spacing={1}
-        className="text-container"
+        class="text-container"
       >
         <Hi />
         <IAm />
@@ -48,15 +48,15 @@ import Socials from "./Socials.astro";
   }
 
   @media (max-width: 760px) {
-    :global(.header.stack) {
+    .header {
       flex-direction: column;
     }
 
-    :global(.header.stack) :global(.text-container.stack) {
+    .header .text-container {
       order: 2;
     }
 
-    :global(.header.stack) .avatar-container {
+    .header .avatar-container {
       order: 1;
     }
   }

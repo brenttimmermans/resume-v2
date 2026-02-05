@@ -41,7 +41,7 @@ const COMPANIES = [
     spacing={5}
     wrap={true}
     justifyContent="center"
-    className="logos-container"
+    class="logos-container"
   >
     {
       COMPANIES.map((company) => (
@@ -75,7 +75,7 @@ const COMPANIES = [
   }
 
   @media (max-width: 500px) {
-    :global(.logos-container.stack) {
+    .logos-container {
       flex-direction: column;
     }
   }
