@@ -2,6 +2,9 @@
 	"name": "resume-v2",
 	"type": "module",
 	"version": "0.0.1",
+	"description": "Hi 👋, I'm Brent and this is my resume!",
+	"author": "brenttimmermans <brenttimmermans7@gmail.com>",
+	"license": "ISC",
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
