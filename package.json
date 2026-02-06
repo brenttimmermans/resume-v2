@@ -16,6 +16,7 @@
 		"check": "biome check ."
 	},
 	"dependencies": {
+		"@astrojs/sitemap": "^3.7.0",
 		"astro": "^5.16.6"
 	},
 	"devDependencies": {

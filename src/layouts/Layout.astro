@@ -4,16 +4,61 @@ import "../styles/fonts.css";
 import "../styles/variables.css";
 import "../styles/global.css";
 import ThemeToggle from "../components/common/ThemeToggle.astro";
+import avatar from "../assets/avatar.png";
+
+const TITLE = "Hi, I'm Brent";
+const DESCRIPTION =
+  "Product builder, runner, photographer, and problem solver. Currently working as a Frontend Developer at Whale. Passionate about creating meaningful digital experiences.";
+const SITE_NAME = "Brent Timmermans";
+const SITE_URL = "https://www.brenttimmermans.dev";
+const GITHUB_URL = "https://github.com/brenttimmermans";
+const LINKEDIN_URL = "https://www.linkedin.com/in/brenttimmermans";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>Hi, I'm Brent</title>
+
+    <title>{TITLE}</title>
+    <meta name="title" content={TITLE} />
+    <meta name="description" content={DESCRIPTION} />
+    <meta name="author" content={SITE_NAME} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={SITE_URL} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:title" content={TITLE} />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:site_name" content={SITE_NAME} />
+
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://github.com" />
+    <link rel="preconnect" href="https://www.linkedin.com" />
+    <link rel="dns-prefetch" href="https://github.com" />
+    <link rel="dns-prefetch" href="https://www.linkedin.com" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Brent Timmermans",
+        jobTitle: "Frontend Developer",
+        description: DESCRIPTION,
+        url: SITE_URL,
+        sameAs: [GITHUB_URL, LINKEDIN_URL],
+        worksFor: {
+          "@type": "Organization",
+          name: "Whale",
+        },
+      })}
+    />
   </head>
   <body>
     <main>
