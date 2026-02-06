@@ -65,12 +65,6 @@ const ENABLE_ANIMATION = true; // Set to false to disable typing animation (word
 
   let currentIndex = 0;
 
-  let typingTimeout = null;
-  let deletingTimeout = null;
-  let waitTimeout = null;
-
-  let rotationInterval = null;
-
   let isTyping = false;
   let isDeleting = false;
 
@@ -79,23 +73,8 @@ const ENABLE_ANIMATION = true; // Set to false to disable typing animation (word
   }
 
   function startTyping() {
-    clearAllTimeouts();
     currentIndex = 0;
     typeWord(words[currentIndex]);
-  }
-
-  function clearAllTimeouts() {
-    clearTimeout(typingTimeout);
-    typingTimeout = null;
-
-    clearTimeout(deletingTimeout);
-    deletingTimeout = null;
-
-    clearTimeout(waitTimeout);
-    waitTimeout = null;
-
-    clearInterval(rotationInterval);
-    rotationInterval = null;
   }
 
   function typeWord(word, index = 0) {
