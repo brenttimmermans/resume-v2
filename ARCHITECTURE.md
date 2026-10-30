@@ -153,6 +153,10 @@ npm run build      # Creates dist/ directory
 npm run preview    # Preview production build locally
 ```
 
+### Deploy
+`dist/` is served as Cloudflare Workers static assets (`wrangler.jsonc`, no Worker script).
+`.github/workflows/deploy.yml` builds and runs `wrangler deploy` on every push to `main`.
+
 ### Code Quality
 ```bash
 npm run lint       # Check with Biome
