@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.brenttimmermans.dev/sitemap-index.xml
+Sitemap: https://brenttimmermans.dev/sitemap-index.xml

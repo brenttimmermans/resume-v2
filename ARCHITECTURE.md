@@ -125,7 +125,7 @@ resume-v2/
 ## Configuration
 
 ### `astro.config.mjs`
-- Site URL: `https://www.brenttimmermans.dev`
+- Site URL: `https://brenttimmermans.dev`
 - Integrations: Sitemap plugin
 
 ### `biome.json`
