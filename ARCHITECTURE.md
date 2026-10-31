@@ -125,7 +125,7 @@ resume-v2/
 ## Configuration
 
 ### `astro.config.mjs`
-- Site URL: `https://www.brenttimmermans.dev`
+- Site URL: `https://brenttimmermans.dev`
 - Integrations: Sitemap plugin
 
 ### `biome.json`
@@ -152,6 +152,10 @@ npm run dev  # Runs on http://localhost:4321
 npm run build      # Creates dist/ directory
 npm run preview    # Preview production build locally
 ```
+
+### Deploy
+`dist/` is served as Cloudflare Workers static assets (`wrangler.jsonc`, no Worker script).
+`.github/workflows/deploy.yml` builds and runs `wrangler deploy` on every push to `main`.
 
 ### Code Quality
 ```bash
