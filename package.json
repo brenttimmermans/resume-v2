@@ -21,9 +21,10 @@
 		"astro": "^5.16.6"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "^2.3.14",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.3.2",
-		"@biomejs/biome": "^2.3.14"
+		"wrangler": "4.155.0"
 	},
 	"lint-staged": {
 		"*.{astro,ts,tsx,js,jsx,json,jsonc,css}": [
